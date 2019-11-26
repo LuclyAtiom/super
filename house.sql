@@ -5,7 +5,9 @@ CREATE TABLE USER(
 	phone INT(20),
 	 PASSWORD VARCHAR(20)
 );
-
+ALTER TABLE USER ADD openid VARCHAR(50)
+ALTER TABLE USER ADD wxname VARCHAR(50)
+ALTER TABLE USER ADD wxphoto VARCHAR(50)
 
 //房源信息基本表（id，地址，图片，价格，面积，类型（几室几厅），房源的预约量，房源简介）
 CREATE TABLE house(
