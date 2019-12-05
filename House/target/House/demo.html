@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/layui/css/layui.css" media="all">
+</head>
+<body>
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div><img src="img/book1.jpg"></div>
+        <div><img src="img/book1.jpg"></div>
+        <div><img src="img/book1.jpg"></div>
+        <div><img src="img/book1.jpg"></div>
+        <div><img src="img/book1.jpg"></div>
+    </div>
+</div>
+<!-- 条目中可以是任意内容，如：<img src=""> -->
+
+<script src="layui/layui/layui.js"></script>
+<script>
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'always'
+            ,autoplay:true
+            ,interval:1800//始终显示箭头
+                //,anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+</body>
+</html>

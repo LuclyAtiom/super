@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <meta name="viewport" content="width=480,target-densitydpi=dpi,minimal-ui">
+    <meta name="viewport" content="width=480,minimal-ui">
+
+    <meta name="viewport" content="width=480,targrt-densitydip=device-dip,minimal-ui">
+
+    <meta name="viewport" content="width=480,initial-scale=scalevalue,maximum-scale=scalevalue,minimum-scale=scalevalue,minimal-ui">
+
+    <meta name="viewport" content="targrt-densitydpi=dpi,minimal-ui">
+
+
+    <title>商品列表</title>
+    <style>
+        .flow-default li {
+            display: inline-block;
+            margin: 0 5px;
+            margin-top:0px;
+            font-size: 14px;
+            width: 90%;
+            margin-bottom: 10px;
+            height: 250px;
+            line-height: 200px;
+            text-align: right;
+            background-color: #eee;
+        }
+
+        .flow-default {
+            margin-top: 10px;
+            width: 980px;
+            height: 1920px;
+            overflow: auto;
+            font-size: 0;
+        }
+
+    </style>
+    <style>
+        *{margin:0;padding:0;}
+        a{text-decoration:none;color:#666;}
+        li{list-style:none;}
+        body{font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif;font-size:14px;color:#666;text-align:center;background: #FFF;} /*设置整个页面*/
+        #box{width:auto;margin:100px auto 0 auto;text-align:center;background: #48AE15; margin-top:5px;padding:5px;}
+        /*导航条*/
+        #nav{width:750px;height:30px;margin:0 auto;line-height:30px;}
+        /*导航条中每一个信息*/
+        #nav a{display:block;width:90px;height:30px;text-align:center;color:#FFF;}
+        #nav a:hover { background: #fff; color: #000; }
+        /*下拉菜单中信息的设置*/
+        #nav li ul{display:none;position:absolute;margin-left:-20px;}
+        #nav li ul li{clear:both;}
+        #nav li ul a{width:120px;border-top:1px solid #FFF;text-align:center;background:#6FE0B2;}
+        /*下拉菜单中信息鼠标经过时的样式：改变背景和字体的颜色*/
+        #nav li ul li a:hover{background:#eb7350;color:#00F7DE;}
+        /*设置每个信息的浮动*/
+        #nav li{float:left;}
+        /*酒店标题部分的设置*/
+        .hotel_title{
+            background-color:#5FB878;
+            width:100px;
+            height:25px;
+            float:left;
+            padding-top:5px;
+            font-size:12px;
+        }
+    </style>
+    <script>
+        /*-----显示子菜单-----*/
+        function display(li) {
+            var subNav = li.getElementsByTagName("ul")[0];/*获取下拉菜单的信息*/
+            subNav.style.display = "block"; /*菜单中的信息以块的形式展示*/
+        }
+        /*-----隐藏子菜单-----*/
+        function hide(li) {
+            var subNav = li.getElementsByTagName("ul")[0];
+            subNav.style.display = "none";/*菜单中的信息不显示*/
+        }
+    </script>
+    <link rel="stylesheet" href="layui/layui/css/layui.css"/>
+    <script src="layui/layui/layui.js" media="all"></script>
+</head>
+<body>
+<div id="box"> <!--header的盒子-->
+    <div class="hotel_title">预约看房</div><!--酒店名字-->
+    <div id="nav"> <!--导航栏-->
+        <ul>
+            <!--导航栏中信息，鼠标经过时调用下拉菜单显示-->
+            <li onmouseover="display(this)" onmouseout="hide(this)"> <a href="javascript:;">首页</a>
+                <ul>
+                    <li><a href="#">预订看房</a></li>
+                    <li><a href="#">查看房源信息</a></li>
+                </ul>
+            </li>
+            <li onmouseover="display(this)" onmouseout="hide(this)" name="address"> <a href="javascript:;">地区</a>
+                <ul>
+                    <li name="1"><a href="#">九龙坡区</a></li>
+                    <li name="2"><a href="#">渝北区</a></li>
+                    <li name="3"><a href="#">江北区</a></li>
+                    <li name="4"><a href="#">大渡口区</a></li>
+                    <li name="5"><a href="#">江津区</a></li>
+                    <li name="6"><a href="#">沙坪坝区</a></li>
+                    <li name="7"><a href="#">北碚区</a></li>
+                    <li name="8"><a href="#">南岸区</a></li>
+                    <li name="9"><a href="#">巴南区</a></li>
+                </ul>
+            </li>
+            <li onmouseover="display(this)" onmouseout="hide(this)"> <a href="javascript:;">房源类型</a>
+                <ul>
+                    <li name="11"><a href="#">一室一厅</a></li>
+                    <li name="22"><a href="#">两室一厅</a></li>
+                    <li name="33"><a href="#">两室两厅</a></li>
+                    <li name="44"><a href="#">三室两厅</a></li>
+                    <li name="55"><a href="#">三室一厅</a></li>
+                </ul>
+            </li>
+            <li onmouseover="display(this)" onmouseout="hide(this)"> <a href="javascript:;">房源价格</a>
+                <ul>
+                    <li name="111"><a href="#"><50万</a></li>
+                    <li name="222"><a href="#">50-100万</a></li>
+                    <li name="333"><a href="#">100-150万</a></li>
+                    <li name="444"><a href="#">150-200万</a></li>
+                </ul>
+            </li>
+            <li><a href="#">登陆</a></li>
+            <li><a href="#">注册</a></li>
+        </ul>
+    </div>
+</div>
+<div class="flow-default" id="demo">
+
+</div>
+
+<script src="js/Vue.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/head.js"></script>
+<!--<script src="js/dd.js"></script>-->
+<!--
+（ 立即执行在网页上打开时就可以看到效果，而调用执行的，一般会在其它控件触发事件的时候调用。）
+对于调用执行的，我们最好放在head里，直接声明或者引用外部文件（head）。
+对于即时执行的，我们在需要js执行的地方声明或者引用外部文件（body）。
+-->
+</body>
+
+</html>
