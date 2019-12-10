@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页面</title>
+    <meta qw="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="viewport" content="width=900,target-densitydpi=dpi,minimal-ui">
+    <meta name="viewport" content="width=900,minimal-ui">
+    <meta name="viewport" content="width=900,targrt-densitydip=device-dip,minimal-ui">
+    <meta name="viewport"
+          content="width=900,initial-scale=scalevalue,maximum-scale=scalevalue,minimum-scale=scalevalue,minimal-ui">
+    <meta name="viewport" content="targrt-densitydpi=dpi,minimal-ui">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/Vue.js"></script>
+    <script src="layui/layui.js" media="all"></script>
+    <script src="js/down.js" media="all"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+
+    <style>
+        .flow-default li {
+            display: inline-block;
+            margin: 0 5px;
+            margin-top:0px;
+            font-size: 14px;
+            width: 90%;
+            margin-bottom: 20px;
+            height: 250px;
+            line-height: 200px;
+            text-align: right;
+            background-color: #eee;
+        }
+
+        .flow-default {
+            margin-top: 10px;
+            width: auto;
+            /*height: 1920px;*/
+            overflow: auto;
+            font-size: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div>
+            <img src="img/楼.jpg" style="width: 100%;height: auto"/></div>
+        <div>
+            <img src="img/楼1.jpg" style="width: 100%;height: auto"/></div>
+        <div>
+            <img src="img/楼2.jpg" style="width: 100%;height: auto"/></div>
+        <div>
+            <img src="img/楼3.jpg" style="width: 100%;height: auto"/></div>
+        <div>
+            <img src="img/楼4.jpg" style="width: 100%;height: auto"/></div>
+    </div>
+</div>
+
+<div id="s2">
+    <ul class="layui-nav" lay-fiter="demo">
+        <li class="layui-nav-item">
+            <a href="javascript:;" style="font-size:45px;">房源类型</a>
+            <d1 class="layui-nav-child">
+                <a style="font-size:40px;" @click="change($event)">全部</a>
+            </d1>
+        </li>
+        <li class="layui-nav-item" style="margin-left: 50px">
+            <a href="javascript:;" style="font-size:45px;">城区</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <!--                <a style="font-size:30px;" @click="change($event)" name="df">全部</a>-->
+                <a style="font-size:40px;" @click="change($event)">九龙坡区</a>
+                <a style="font-size:40px;" @click="change($event)">渝北区</a>
+                <a style="font-size:40px;" @click="change($event)">江北区</a>
+                <a style="font-size:40px;" @click="change($event)">大渡口区</a>
+                <a style="font-size:40px;" @click="change($event)">渝中区</a>
+                <a style="font-size:40px;" @click="change($event)">沙坪坝区</a>
+                <a style="font-size:40px;" @click="change($event)">北碚区</a>
+                <a style="font-size:40px;" @click="change($event)">南岸区</a>
+                <a style="font-size:40px;" @click="change($event)">巴南区</a>
+            </dl>
+        </li>
+        <li class="layui-nav-item" style="margin-left: 50px;">
+            <a href="javascript:;" style="font-size:45px;">房源类型</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <!--                <a style="font-size:30px;" @click="change($event)">全部</a>-->
+                <a style="font-size:40px;" @click="change($event)">一室一厅</a>
+                <a style="font-size:40px;" @click="change($event)">二室一厅</a>
+                <a style="font-size:40px;" @click="change($event)">三室一厅</a>
+                <a style="font-size:40px;" @click="change($event)">二室二厅</a>
+                <a style="font-size:40px;" @click="change($event)">三室二厅</a>
+            </dl>
+        </li>
+        <li class="layui-nav-item" style="margin-left: 50px;">
+            <a href="javascript:;" style="font-size:40px;">价格</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <!--                <a style="font-size:30px;" @click="change($event)">全部</a>-->
+                <a style="font-size:40px;" @click="change($event)">10-50万</a>
+                <a style="font-size:40px;" @click="change($event)">100-150万</a>
+                <a style="font-size:40px;" @click="change($event)">150-200万</a>
+            </dl>
+        </li>
+    </ul>
+
+    <!-- 轮廓图数据刷新 -->
+    <div id="demo">
+    </div>
+
+    <script>
+        var a = '全部';
+        new Vue({
+            el: '#s2',
+            methods: {
+                change(event) {
+                    a = event.target.innerHTML;
+                    document.getElementById('demo').innerHTML = "";
+                    layui.use(['element', 'flow'], function () {
+                        var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+                        var flow = layui.flow;
+                        flow.load({
+                            elem: '#demo' //指定列表容器
+                            , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
+                                var lis = [];
+                                //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                                $.get('/House/zym?page=' + page + "&city=" + a, function (res) {
+                                    //假设你的列表返回在data集合中
+                                    // 假设你的列表返回在data集合中
+                                    //lis.push('<li>'+ res.qw+'</li>');
+                                    layui.each(res, function (index, item) {
+                                        lis.push("<li>" + "<a href='/House/cc.html'>" +
+                                            "  <div style='height: 0px ;float: left ;width: auto'>" + "<img src=\"" + item.photos + "\" width='350px' height='800px'>" + "</div>" +
+                                            "  <div style='height: 70px ;width: 800px;margin-left: 410px;font-size: 40px'>" + item.address + "</div>" +
+                                            "  <div style='height: 70px ;width: 800px;margin-left: 410px;font-size: 40px'>" + item.type + "</div>" +
+                                            "  <div style='height: 70px ;width: 800px;margin-left: 410px;font-size: 40px'>" + item.money + "</div>" + " </a>" +
+                                            "</li>");
+                                    });
+                                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                                    next(lis.join(''), page <= page);
+                                }, "json");
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
